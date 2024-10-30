@@ -1,4 +1,4 @@
-use company_constraints;
+use azure_company;
 
 insert into employee values ('John', 'B', 'Smith', 123456789, '1965-01-09', '731-Fondren-Houston-TX', 'M', 30000, 333445555, 5),
 							('Franklin', 'T', 'Wong', 333445555, '1955-12-08', '638-Voss-Houston-TX', 'M', 40000, 888665555, 5),
@@ -55,8 +55,7 @@ insert into works_on values (123456789, 1, 32.5),
 -- Consultas SQL
 
 select * from employee;
-select Ssn, count(Essn) from employee e, dependent d where (e.Ssn = d.Essn);
-select * from dependent;
+
 
 SELECT Bdate, Address FROM employee
 WHERE Fname = 'John' AND Minit = 'B' AND Lname = 'Smith';
@@ -101,11 +100,10 @@ SELECT * FROM employee WHERE Dno IN (3,6,9);
 
 SELECT Bdate, Address
 FROM EMPLOYEE
-WHERE Fname = ‘John’ AND Minit = ‘B’ AND Lname = ‘Smith’;
+WHERE Fname = 'John' AND Minit = 'B' AND Lname = 'Smith';
 
 SELECT Fname, Lname, Address
-FROM EMPLOYEE, DEPARTMENT
-WHERE Dname = ‘Research’ AND Dnumber = Dno;
+FROM EMPLOYEE
 
 --
 --

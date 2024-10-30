@@ -1,4 +1,4 @@
-create schema if not exists azure_company;
+create database azure_company;
 use azure_company;
 
 select * from information_schema.table_constraints
@@ -28,9 +28,12 @@ alter table employee
     on delete set null
     on update cascade;
 
-alter table employee modify Dno int not null default 1;
+ALTER TABLE employee
+ADD CONSTRAINT DF_employee_Dno DEFAULT 1 FOR Dno;
 
-desc employee;
+ALTER TABLE employee
+ALTER COLUMN Dno INT NOT NULL;
+
 
 create table departament(
 	Dname varchar(15) not null,
@@ -46,12 +49,12 @@ create table departament(
 
 -- 'def', 'company_constraints', 'departament_ibfk_1', 'company_constraints', 'departament', 'FOREIGN KEY', 'YES'
 -- modificar uma constraint: drop e add
-alter table departament drop  departament_ibfk_1;
+
 alter table departament 
 		add constraint fk_dept foreign key(Mgr_ssn) references employee(Ssn)
         on update cascade;
 
-desc departament;
+
 
 create table dept_locations(
 	Dnumber int not null,
@@ -87,7 +90,7 @@ create table works_on(
     constraint fk_project_works_on foreign key (Pno) references project(Pnumber)
 );
 
-drop table dependent;
+
 create table dependent(
 	Essn char(9) not null,
     Dependent_name varchar(15) not null,
@@ -98,5 +101,4 @@ create table dependent(
     constraint fk_dependent foreign key (Essn) references employee(Ssn)
 );
 
-show tables;
-desc dependent;
+select * from sys.tables
